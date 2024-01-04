@@ -1,7 +1,6 @@
 package com.rafael.chess;
 
 import com.rafael.boardgame.Board;
-import com.rafael.boardgame.Position;
 import com.rafael.chess.pieces.King;
 import com.rafael.chess.pieces.Rook;
 
@@ -22,9 +21,13 @@ public class ChessMatch {
         }
         return matrix;
     }
+
+    private void placeNewPiece(char column, int row, ChessPiece piece){
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
     
     private void inicialSetup(){
-        board.placePiece(new Rook(board, Color.WHITE), new Position(2, 3));
-        board.placePiece(new King(board, Color.BLACK), new Position(0, 5));
+        placeNewPiece('b', 3, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 8, new King(board, Color.BLACK));
     }
 }
