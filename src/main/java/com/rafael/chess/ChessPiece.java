@@ -3,7 +3,7 @@ package com.rafael.chess;
 import com.rafael.boardgame.Board;
 import com.rafael.boardgame.Piece;
 
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
     
     private Color color;
     
