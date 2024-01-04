@@ -1,6 +1,8 @@
 package com.rafael.chess;
 
 import com.rafael.boardgame.Board;
+import com.rafael.boardgame.Piece;
+import com.rafael.boardgame.Position;
 import com.rafael.chess.pieces.King;
 import com.rafael.chess.pieces.Rook;
 
@@ -20,6 +22,27 @@ public class ChessMatch {
             }
         }
         return matrix;
+    }
+
+    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition){
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        valiateSourcePosition(source);
+        Piece captured = makeMove(source, target);
+        return (ChessPiece)captured;
+    }
+
+    private void valiateSourcePosition(Position position){
+        if(!board.thereIsAPiece(position)){
+            throw new ChessException("Não há peça na posição selecionada");
+        }
+    }
+
+    private Piece makeMove(Position source, Position target){
+        Piece p = board.removePiece(source);
+        Piece captured = board.removePiece(target);
+        board.placePiece(p, target);
+        return captured;
     }
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
